@@ -143,3 +143,23 @@ After installation your `kubeconfig` file will be ready inside your master machi
 ```
 
 Change `server: https://127.0.0.1:6443` to your master node IP and connect to your Kubernetes cluster
+
+
+## Adding new Node
+
+Add new node to the inventory:
+
+```
+node4-worker:
+    ansible_host: 85.203.123.126
+    ip: 85.203.123.126
+    access_ip: 85.203.123.126
+```
+
+Run cmd
+
+```bash
+ansible-playbook -i inventory/sample/hosts.yml scale.yml --limit=node4-worker -u root -b -e ignore_assert_errors=yes
+```
+
+That's it! Kubespray will check which K8S version you're running and match it with your server
